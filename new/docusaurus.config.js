@@ -69,8 +69,14 @@ const config = {
           {
             type: 'doc',
             position: 'left',
-            label: '文档',
-            docId: 'contribute/index',
+            label: '服务器维基百科',
+            docId: 'botwmcs/index',
+          },
+          {
+            type: 'doc',
+            position: 'left',
+            label: '模组文档',
+            docId: 'modwiki/index',
           },
           {
             href: REPO_URL,
@@ -98,7 +104,7 @@ const config = {
           {
             title: '社区',
             items: [
-              { label: '加入我们', href: 'contribute' },
+              { label: '加入我们', href: 'joinus' },
               { label: 'Contribute', href: 'contribute' },
 
             

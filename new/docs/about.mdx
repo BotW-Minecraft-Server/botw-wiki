@@ -1,254 +1,118 @@
 ---
-title: About this project
+title: 关于此项目
 sidebar_position: 0
 displayed_sidebar: null
-pagination_next: contribute/index
+pagination_next: botwmcs/index
 ---
 
-# Breath of the Wild Decompilation
+# Persists Realms 持续领域
 
 <h3>
-  An experimental, WIP decompilation of <i>Breath of the Wild</i> v1.5.0 (Switch)
+  一个实验性的、开源的、公益化的 Minecraft 服务器社区
 </h3>
 
 
-## What is this?
+## 这是什么？
 
-This is an ongoing reverse engineering project to analyse and decompile/reimplement part of *The Legend of Zelda: Breath of the Wild* (Switch v1.5.0).
+Persists Realms 持续领域（前 BotWMCS）是一个公益性的 Minecraft 服务器社区团体，我们做 Mojang 没有做的事情。
 
-More specifically, we are reimplementing the main [executable](https://en.wikipedia.org/wiki/Executable) using the technique of *matching decompilation*.
+目前，我们致力于完善一个原版化的养老生存主题服务器，并且我们正在开发针对多人游戏的模组，比如 [BotWMCS RealmsHost](https://github.com/BotW-Minecraft-Server/RealmsHost)。
 
-:::caution Important note
-  This project does not contain game assets or RomFS content and **cannot** be used to play *Breath of the Wild*.
+:::caution 注意事项
+  我们并不对 Minecraft 进行任何逆向工程研究，我们只是一个 Minecraft 模组开发团队和服务器团队。
 :::
 
-### Decompilation
+### 关于 BotWMCS 和 Persists Realms
 
-*Decompilation* is the process of turning compiled code back into equivalent, human-readable source code.
+BotWMCS 是一个由 2021/05/01 开始的 Minecraft 养老生存服务器。起初这只是一个好友之间的联机游戏，而后由于一则 [Bilibili 视频](https://www.bilibili.com/video/BV11o4y127DP)意外地火爆，从而经历了 6 个大版本，演变成了一个庞大的模组服务器。
 
-For a modern game such as *Breath of the Wild*, that involves reading the compiled code, trying to understand what it does, and then reimplementing the logic in original C++ code.
+在服务器人数逐渐增多的情况下，起初为联机游戏设计的游戏模式逐渐无法应对庞大的玩家群体。在经过第 6 个大版本之后，Sam_Chai（BotWMCS 服主）决定，重新制作 BotWMCS。于是，本就针对多人游戏的 Persists Realms 诞生了。
 
-#### Matching decompilation
+#### Persists Realms
 
-*Matching* decompilation goes one step further and produces source code that **compiles to the exact same machine code**.
-That makes it very easy to verify our implementation is functionally equivalent to the original one: the machine code can directly be compared against the original executable.
+Persists Realms（简称 PR，又或者为 持续领域），是脱胎于 BotWMCS 但又不继承 BotWMCS 的全新的服务器。内部版本号为 Patch 7，但由于迫切地想让玩家了解持续领域为一个全新的、与 BotWMCS 卡顿且臃肿的服务器分割开来的，持续领域引入了一个全新的版本号，即 LTSX。
 
-While our source code is functionally equivalent to the original compiled code, it is almost surely different from the original *source* code.
-Compiling is a lossy process, so the original codebase cannot be recovered with this technique. (And recovering Nintendo's original copy of the source code is not the goal of the project anyway.)
+### 重新制作与考量
 
-### Reimplementation
+*目前，传统的 Minecraft 服务器仍然划分为两个大的群体，即插件服和模组服。BotWMCS 作为一个典型的模组服务器，并没有体现大型服务器应该有的管理制度和模式，在服务器人数近乎破百的情况下，竟然仍没有开发出较为完善的权限系统，这使得玩家们的权限不受严格控制，引发了许多的争端。*
 
-*Traditional* matching decompilation produces source code that is very close to the original source, as there isn't much leeway to deviate from it while still matching the original machine code.
+玩家们的争端使得 BotWMCS 被加速地推进了墓碑中，在 BotWMCS 寿终正寝之际，Sam Chai 计划推出一个全自主研发模组的服务器。这也是 LTSX 的雏形。
 
-However, the situation is quite different with modern compilers (such as Clang) which optimise very aggressively.
-It is not uncommon for two very different code snippets to produce the same machine code!
-This is especially true with languages such as C++ and Rust which emphasise *zero cost abstractions* &mdash; the concept of being able to write high-level code that compiles into optimised code on par with optimised low-level code you might have tediously written by hand.
+全自主研发的服务器被快速地提上日程，但 Sam Chai 与全体的服务器玩家高估了这一开发的进度。由于 BotWMCS 后期橡皮图章似的管理组和名不副其实的开发组，使得 LTSX 全自主研发计划一拖再拖，导致玩家流失惨重。于是，Sam Chai 决定重新考量这一计划的必要性，在听从其余老玩家们的建议后，决定以半研发模式推进这一计划。这也是 Persists Realms 目前做的工作。
 
-Having zero cost abstractions and good compilers means that we can usually implement a function however we want and:
+### 目前的开发进度...
 
-* either have our reimplemented version "match" (i.e. produce the same compiled code) on the first try
-* or be able to massage our implementation into matching &mdash; with relative ease
+正如预想中的那样，Persists Realms 目前正在尝试走出历史的泥潭中，以一个全新的服务器彻底抛弃 BotWMCS 的历史包袱。
 
-This significantly blurs the lines between reimplementation and matching decomp, to the point this project should be considered a **hybrid decompilation/reimplementation** rather than a pure decomp project.
+* **全新的版本与模组列表。**持续领域目前正在 1.20.1 Fabric 平台开发，采用与 BotWMCS 模组不同、但游玩方法大致相同的模组。这包括 ReTerraForged、Let's Do 系列的模组。
+* **通过自主研发模组为 Fabric 服务器提供多人游戏可用性。**以往模组服务器都需要 Hybrid 服务端提供 Bukkit API 来满足服务器的管理系统所需，而通常这种服务端的兼容性和稳定性都很差。持续领域的目的是提供一个高可用、流畅的游玩环境，所以 Sam Chai 决定将自研模组开发重心移至服务器侧以保证纯 Fabric API 也有类似的管理系统。
+* **一个设想：在移动平台运行持续领域客户端。**在遥远的将来，持续领域或许可以走进玩家的手机中，通过*~~某些魔法技术~~*来打通基岩版模组服的隔阂。
+* **为其他模组服务器提供一个点子。**持续领域在纯模组服的道路上一路深耕，造就了 [RealmsHost](https://github.com/BotW-Minecraft-Server/RealmsHost)。该模组深度改写了 Fabric 服务端核心，提供了类似 Bukkit API 的权限管理系统。
 
-Coupled with the fact we use standard development tooling, working on this project can feel a lot like working on a regular software project, just with weird specs and an unusual unit testing mechanism (assembly diffing).
+## 目前开服了吗？
 
-### What this is not
+很抱歉，还没有。
 
-As explained above, this is a decompilation/reimplementation project. Just to clear up possible misunderstandings, this project is *none of the following*:
+目前由于 Sam Chai 个人的情况，已经不能有全部的时间去打理与开发持续领域，但目前即使进度缓慢，也仍在进行当中。
 
-* **A complete reconstruction of the entire game (including assets).** BotW is a modern game with a clear separation between the executable and asset files (e.g. models, sounds, configuration files, etc.) so we can focus on the interesting parts (the executable) and leave the assets alone.
-
-* **A way to play BotW if you do not own the game.** This project is completely useless to anyone who does not own the game.
-
-* **A way to play BotW on PC or [insert platform].** This is a reverse engineering project, not a port. Porting the game to other platforms is **explicitly a non-goal**.
-
-* **A code modding tool.** Currently this project does not produce a working executable; the generated ELF only contains reimplemented functions, so this project cannot be directly used for code modifications. However, the knowledge (function names, type definitions, etc.) contained within the repository should be highly useful for anyone who wants to actually mod the game.
-
-* **A traditional matching decomp project.** Given the impossibility of automatically splitting the assembly (as is done in many other decomp projects), the sheer size of the main executable and the usage of many software libraries, this project takes an experimental approach to matching decompilation.
-
-  Instead of trying to match the entire executable, each function is matched individually and source code is organised in whichever way makes the most sense.
-  No effort is currently being made to put functions and data at the original memory addresses.
-
-  The result is that the codebase looks a lot more like a regular software project than a decompilation codebase.
-  And since C++ code makes heavy use of inline functions and zero cost abstractions that disappear in compiled code, contributors have a lot more leeway when it comes to organising files and adding abstractions.
-
-## Why?
-
-The goal of this project is to better understand game internals, aid with glitch hunting and document existing knowledge in a permanent, unambiguous form which helps further reverse engineer the game.
-
-Each contributor has different reasons for contributing, but most of us want to help achieve those goals and/or find it fun. (Yes, decomp can be fun! Reverse engineering a game such as *Breath of the Wild* is basically like solving a giant puzzle.)
-
-Let's be realistic &mdash; considering the large size of the executable (~40MB) and our limited manpower, it is not expected to reach 100% [progress](/progress) anytime soon. But even in its incomplete state, it will help with understanding and reverse engineering the game.
-
-:::caution Reminder
-Porting the entire game to other platforms is **explicitly a [non-goal](#what-this-is-not)**. Anyone claiming otherwise is misinformed.
+:::info 集结号令
+如果你对于持续领域项目感兴趣，或者你具有一定的 Minecraft 开发基础，或你想为持续领域项目提供一些个人的点子，欢迎加入我们成为开发组的一员，共同开发持续领域。
 :::
 
-## Project scope
+## 项目进度
 
-Only the main executable (BotW code + most statically linked libraries) is in scope.
-The RomFS and the SDK libraries are out of scope.
+* :heavy_check_mark: 主要玩法构建
+    * Fabric API
+        * :heavy_check_mark: 完成兼容性测试以及跨平台测试
+        * :heavy_check_mark: 基础的开发框架
+    * 自研模组
+        * :heavy_check_mark: Libraries
+        * :heavy_check_mark: GUI 图形的绘制
+        * :x: RHX
+        * :x: RHX SDK 的开发
+        * :x: 其他自研模组，诸如权限分级管理、小镇制度、公会制度等​ 
+* :heavy_check_mark: LTSX 第一个版本的模组列表​
+* :heavy_check_mark: 地形调整与测试​
+* :x: 实装模组与测试兼容性
+* :x: 无自研模组下的内部测试
 
-Excluded libraries will not be fully decompiled but may be partly re-implemented or decompiled, and (reverse-engineered) headers will be provided so that the rest of the codebase can still use those libraries.
+## 关于 Persists Realms 的开发组
 
-* :heavy_check_mark: Main executable (main NSO)
-    * *Breath of the Wild* code
-        * :heavy_check_mark: Actual game code (`Game` / uking:: namespace)
-        * :heavy_check_mark: Framework/engine code (`KingSystem` / ksys:: namespace)
-    * Statically linked libraries
-        * :heavy_check_mark: First-party libraries (e.g. sead, agl, EventFlow, etc.)
-        * :heavy_check_mark: NintendoSDK inlined utilities
-        * :x: libcurl
-        * :x: NintendoSDK-NEX
-        * :x: Havok (physics engine), except inlined utilities
-        * :heavy_check_mark: Any other statically linked library
-* :x: Dynamically linked SDK libraries
-* :x: RomFS (assets)
+### 我们都在干什么？
 
-## Frequently Asked Questions
+这已经在[开头](#这是什么)解释了。
 
-### What is matching decompilation?
+### 我们在开发哪些内容
 
-This is explained in the [intro](#decompilation).
+基于 Fabric 的用于构建大型多人游戏服务器的模组。如为玩家提供数字货币的模组、权限节点模组、领地模组、小镇、公会模组、经济系统和商店模组等等。
 
-### What language is BotW written in?
+此外，我们也会考虑开发独一无二的玩法性模组。
 
-*Breath of the Wild* is fully written in C++ &mdash; either C++11 or C++14. Our implementation uses C++17 to make things more convenient for our contributors.
+### 目前都有什么项目
 
-### What compiler was used?
+可以从 [GitHub](https://github.com/BotW-Minecraft-Server) 查看。
 
-The Switch build of v1.5.0 was likely compiled with Clang 4.0.
+### 我们的现状
 
-Nintendo is known to have their own proprietary fork of LLVM/Clang, but we do not know what changes were made to their compiler. So far, we have been able to match a lot of code using upstream Clang 4.0, though.
+正如上文所述，目前即使是开发组，也陷入发展缓慢阶段，这由于目前的开发组仍然以 Sam Chai 为主导的开发工作。目前，Sam Chai 正在考虑将开发组领导者替换为 jianzoushihu（BotWMCS 的老玩家，目前正在为持续领域贡献自己的成果）
 
-### What version is being decompiled?
-
-We are decompiling the Switch 1.5.0 version because working with Clang is much nicer than working with the Wii U's proprietary compiler (GHS)... and also at least an order of magnitude nicer than dealing with most compilers that are used for other matching decomp projects for that matter.
-
-Cross-referencing code with the Wii U 1.5.0 build has proven to be useful on occasion though, because GHS often optimises and inlines differently, and that can help reveal the existence of inline functions.
-
-### Why not decompile 1.6.0?
-
-Because of aggressive compiler optimisations and severe code bloat, 1.6.0 is extremely painful to reverse engineer, let alone decompile. [See here](https://gist.github.com/leoetlino/3156c286c7232c2e73b9b74b91021353) for a comparison between 1.5.0 and 1.6.0 code of the main function (called `nnMain`).
-
-(The culprit is link time optimisation, which allows LLVM to perform extremely aggressive inlining even across translation units.)
-
-### Does the original executable contain function and variable names (symbols)?
-
-No, it does not. Unlike some other first-party Switch games such as *Super Mario Odyssey*, all known release builds of the game are fully *stripped*, i.e. they do not contain any symbols.
-
-### How do you name things then?
-
-Most names are just more or less educated guesses: many file names, class or function names come from leftover strings or from extrapolating existing names.
-
-As more parts of the game get reimplemented, it becomes easier to figure out what the rest of the game is doing and equally easier to name functions. It's a positive feedback loop.
-
-### How easy is it to match functions?
-
-Compared to other decomp projects for older compilers: **very easy**. Clang is an extremely reasonable compiler with much fewer memes than older compilers such as IDO or older versions of GCC:
-
-* Stack reordering issues are extremely rare, given that AArch64 uses its registers a lot more efficiently. Even when the stack is used, things Just Work™ in the vast majority of cases.
-* Pure register allocation (regalloc) issues are almost non-existent. If you see something that looks like a regalloc problem, it usually means your code is not semantically equivalent.
-* No `if (1)` shenanigans.
-* No "same line" memes (codegen being different if two statements are put on the same line).
-* Whitespace doesn't matter.
-
-In general, two equivalent constructs that *should* clearly produce the same code actually produce the exact same code. There are exceptions, of course, but many things simply do not matter at all for matching. Inline functions do often affect codegen, though.
-
-Getting perfect matches on the first try happens pretty often, even for medium-sized and large functions (>1kB).
-
-Most functions tend to call several other inline functions, notably utility functions from Nintendo's standard library (sead). As many core sead modules have already been reimplemented, decompiling a function sometimes only requires recognising those function calls. We are basically abstracting decompilation away!
-
-### I only have 1.6.0. Can I still contribute?
-
-Yes! You can contribute if you dump the 1.5.0 *or* 1.6.0 executable from your Switch.
-
-### Do I need to be a game dev or a C++ expert to contribute?
-
-No, of course not. But you should be somewhat familiar with software development practices and C++ or a language with object-oriented aspects such as Java or Python.
-
-Unlike many other decomp projects, familiarity with C or assembly is not required. The reason for this is that BotW is a modern game with many layers of abstractions. Many functions can be decompiled simply by recognising code patterns / inline functions. Our assembly comparing tool ([asm-differ](https://github.com/simonlindholm/asm-differ)) is also capable of showing how each line of assembly maps to the source code, so you won't get lost in the assembly even if you're unfamiliar with [AArch64](https://en.wikipedia.org/wiki/AArch64).
-
-AArch64 is also nicer to deal with than x86/x86-64 and should feel familiar to you if you have already worked with e.g. ARM or MIPS.
-
-While you certainly do not need to be a C++ expert, you do need to be familiar with basic language features and concepts like namespaces or classes. Otherwise, you will be unable to contribute in any efficient or meaningful way.
-
-### Does C++ make decomp harder?
-
-For BotW: **no**. Quite the opposite, in fact.
-
-:::note "C++ bad!!1!"
-Among certain circles, C++ has a bad reputation which isn't entirely ill-deserved: it's undeniably a complex language that is very difficult to learn and use correctly. And it doesn't help that it's often not *taught* properly as well &mdash; many resources teach the language like it was 20 years ago, not how it is today.
-
-However, the language has improved a lot in recent years and can definitely be a very powerful tool when used right.
+:::info 招贤纳士
+如果任何人具有相关开发经验，都可以前来为自己施展拳脚。我们急缺宝贵的开发者人才。
 :::
 
-First of all, C++'s zero cost abstractions have forced compilers to step up their optimisation game which &mdash; as explained in the [intro](#reimplementation) &mdash; actually makes matching decomp a lot easier. We can even build our own abstractions to make implementing things easier without impacting our ability to match.
+### 我能做什么？
 
-Second, we can rely on C++ language features to make our life easier when reimplementing functions. Modern C++ is a lot more pleasant to write than 90s C (or C++98 for that matter) and gives us even more convenience features.
+如果你是曾经的 BotWMCS 玩家，什么也不用做。全新的 Persists Realms 值得等待。
 
-* For instance, a lot of initialisation functions can be matched without writing a single line of function code:
-
-  ```cpp
-  class RagdollController {
-      // ...
-      SkeletonMapper* mSkeletonMapper = nullptr;
-      ModelBoneAccessor* mModelBoneAccessor = nullptr;
-      hkaRagdollInstance* mRagdollInstance = nullptr;
-      SystemGroupHandler* mGroupHandler = nullptr;
-      sead::Buffer<RigidBody*> mRigidBodies;
-  };
-  ```
-
-  You just declare how the member variables should be initialised or use objects that initialise themselves (like `sead::Buffer`), and the compiler automatically generates a constructor function that does what you want.
-
-* **Destructors** make it possible for objects to clean up after themselves. No need for manual cleanup code and `goto fail;` and no more forgetting to unlock a mutex before returning. ([RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) is such a useful pattern that it also exists in Rust, completely unchanged.)
-
-* **Templates** make it possible to write typesafe generic code with ease. And in the context of matching decomp, they enable us to match dozens of functions by just writing a single function template! The mantras 'work smart, not hard' and 'don't repeat yourself' come to mind. (We are not talking about heavy template metaprogramming &mdash; which Nintendo games do not use for the most part.)
-
-* **Operator overloading.** When used carefully &mdash; and Nintendo does use it well &mdash; operator overloading can be a nice readability improvement. Adding two vectors together is just `u + v` instead of `{u.x + v.x, u.y + v.y, u.z + v.z}` (or a horrible macro or unergonomic explicit function call).
-
-* Types can be deduced with `auto`, so you don't need to repeat yourself (e.g. when casting or when the type is really obvious).
-
-Last but not least, C++ language features (e.g. classes, virtual functions, hierarchy, etc.) leak a lot of information about the structure of the game codebase, which helps with understanding the codebase and organising our reimplementation.
-
-Reverse engineering and decompiling C++ code does require some knowledge of how certain C++ features are implemented, but that will be explained in due time.
-
-### How can I help?
-
-Head over to the [contributing docs](/contribute) for more information about contributing to the project, including an FAQ for new contributors.
+如果你是开发者，对我们的项目感兴趣，欢迎加入我们。
 
 <details>
-  <summary>Is this legally risky?</summary>
+  <summary>如何加入我们</summary>
 
-Let us first say that we believe what we are doing to be legal &mdash; otherwise we would not be doing it (obviously).
+这是一个适合你施展拳脚的机会。我们急需要新鲜的想法。如果你有任何点子或具有 Minecraft 开发经验，那么都可以前来为持续领域贡献一份力。
 
-But just like other game decompilations, this project is in a legal gray zone.
-There are literally no legal precedents for this kind of work in any jurisdiction.
-Nevertheless, the authors of this project believe that it is unlikely to bother NCL for the following reasons:
+加入我们的方式很简单，可以向我们的任意仓库发送 issue，标题写明自己有意愿加入持续领域开发组即可。
 
-* Contributing to this project requires owning the game on a Switch console and dumping the executable.
-* This project is completely useless to anybody who does not have the game.
-    * It cannot be used to play the game.
-    * It does not give you any useful knowledge if you do not play the game or if you do not even have it.
-* This project is only about the executable, which is less than 0.3% of the whole game.
-* Even if the executable were fully decompiled, it would still not be possible to play the game without dumping the RomFS from a Switch.
-* This project does not contain any original code from the executable.
-    * Unlike some decompilation projects for older consoles, not even a single byte of assembly code is included from the original executable. It only contains reimplemented functions.
-    * Contributions that copy the assembly &mdash; or the pseudocode given by tools such as Hex-Rays or Ghidra &mdash; are rejected. We only accept contributions that are transformative in nature.
-    * The compiler is Clang, so there are many, many, many ways to write a function and organise things while still getting the exact same code.
-    It is extremely likely that the original codebase looks very different from our implementation.
-* This project does not use any proprietary SDK or any leaked BotW document at all.
-    * The compiler is just Clang 4.0 which is freely available on [LLVM's website](https://releases.llvm.org/). The SDK compiler is **not** used.
-    * Anyone who has had access to leaked information about BotW is not allowed to contribute.
-
-#### Why not do a clean room reimplementation to minimise risk?
-
-This is a large monolithic game so matching decompilation is the only realistic way of ensuring any reimplementation is fully accurate to the original logic.
-
-Clean room design (i.e. having separate teams doing reverse engineering and implementation work) is not a solution when the goal is to follow the original logic as accurately as possible. Especially not with our current manpower.
-
-And even if it were, clean room design is not an bulletproof legal defense and does not prevent frivolous litigation.
+或者直接联系 [Sam Chai](https://sam-chai.com)。
 
 </details>
