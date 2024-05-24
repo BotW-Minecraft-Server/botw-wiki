@@ -4,7 +4,6 @@
 const darkCodeTheme = require('prism-react-renderer/themes/vsDark');
 
 const REPO_URL = 'https://github.com/BotW-Minecraft-Server';
-const DISCORD_URL = 'https://discord.zelda64.dev';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -12,7 +11,7 @@ const config = {
   tagline: 'We are open-source and free Minecraft Server group.',
   url: 'https://botw.link',
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/link/128x128.png',
   trailingSlash: false,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -55,7 +54,7 @@ const config = {
         title: 'Persists Realms',
         logo: {
           alt: 'Persists Realms',
-          src: 'img/logo.png',
+          src: 'img/link/512x512.png',
           height: 32,
           width: 32,
         },
