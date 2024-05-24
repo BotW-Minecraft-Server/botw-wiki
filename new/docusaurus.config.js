@@ -78,6 +78,11 @@ const config = {
             docId: 'modwiki/index',
           },
           {
+            to: 'blog',
+            label: '日志',
+            position: 'left',
+          },
+          {
             href: REPO_URL,
             label: 'GitHub',
             position: 'left',
